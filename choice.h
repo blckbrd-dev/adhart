@@ -12,6 +12,7 @@ namespace adhart
 		RIGHT,
 		WAIT,
 		PRAY,
+		JUMP,
 		QUIT,
 		YES,
 		NO
@@ -22,6 +23,7 @@ namespace adhart
 		{ RIGHT, 	"go right" },
 		{ WAIT, 	"wait    " },
 		{ PRAY, 	"pray    " },
+		{ JUMP, 	"jump    " },
 		{ QUIT, 	"quit    " },
 		{ YES, 		"accept  " },
 		{ NO, 		"decline " }

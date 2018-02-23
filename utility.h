@@ -20,3 +20,15 @@ T& random_from_array(T* ts, int n)
 template <typename T> int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
+
+void log(std::string message)
+{
+		move(0, 0);
+		addstr(message.c_str());
+}
+
+void clog()
+{
+	move(0, 0);
+	addstr("															");
+}

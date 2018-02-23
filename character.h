@@ -1,15 +1,22 @@
 #pragma once
 
+#include "entity.h"
+
 namespace adhart 
 {
 	struct character : public entity
 	{
 		choice decision;
+		entity* killer;
 		int floor;
+		int lvl;
 
 		character() 
-			: decision(NONE)
+			: entity("player", 1, 10)
+			, decision(NONE)
+			, killer(nullptr)
 			, floor(0)
+			, lvl(1)
 		{}
 
 		~character()
@@ -28,10 +35,10 @@ namespace adhart
 						floor = level::current->walk(1);
 					break;
 				case PRAY:
-					// todo: do something here
+					// TODO: do something here
 					break;
 				case JUMP:
-					// todo: do something here
+					// TODO: do something here
 					break;
 				case WAIT:
 					break;
@@ -45,7 +52,17 @@ namespace adhart
 
 		void draw()
 		{
-			addch('@');
-		}		
+			addch('@' | A_BOLD);
+		}
+
+		bool damage(entity* e)
+		{
+			if(entity::damage(e))
+			{
+				killer = e;
+			}
+
+			return !alive;
+		}
 	};
 }

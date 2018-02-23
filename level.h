@@ -85,8 +85,8 @@ namespace adhart
 			{
 				if(next[to]->alive)
 				{
-					next[to]->death(next[from]);
-					next[to] = new corpse(next[to]);
+					if(next[to]->damage(next[from]))
+						next[to] = new corpse(next[to]);
 				}
 				else
 				{
@@ -108,11 +108,8 @@ namespace adhart
 					player_position = i;
 			}
 
-			if(player_position != -1)
-			{
-				level::iterator = player_position;
-				player->update();
-			}
+			level::iterator = player_position;
+			player->update();
 
 			for(int i = 0; i < length; i++)
 			{
@@ -123,7 +120,7 @@ namespace adhart
 
 				if(holesBelow[i] != nullptr) {
 					if(holesBelow[i]->current == spawner::state::SPAWNED
-					   && entities[i] == nullptr) {
+					   && next[i] == nullptr) {
 						holesBelow[i]->spawn->init();
 						next[i] = holesBelow[i]->spawn;
 						holesBelow[i]->clear();
@@ -134,7 +131,7 @@ namespace adhart
 
 				if(holesAbove[i] != nullptr) {
 					if(holesAbove[i]->current == spawner::state::SPAWNED
-					   && entities[i] == nullptr) {
+					   && next[i] == nullptr) {
 						holesAbove[i]->spawn->init();
 						next[i] = holesAbove[i]->spawn;
 						holesAbove[i]->clear();
@@ -195,6 +192,8 @@ namespace adhart
 					return std::pair<int, T*>(i, dynamic_cast<T*>(entities[i]));
 				}
 			}
+
+			return std::pair<int, T*>(-1, nullptr);
 		}
 
 	private:

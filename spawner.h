@@ -23,9 +23,10 @@ namespace adhart
 		std::function<entity*()> kind;
 
 		spawner(std::function<entity*()> kind)
-			: current(state::EMPTY)
+			: entity("spawner")
+			, current(state::EMPTY)
 			, spawn(nullptr)
-			, speed(rand() % 5 + 3)	// 3 to 8 turns
+			, speed(rand() % 15 + 3)	// 3 to 8 turns
 			, tick(0)
 			, kind(kind)
 		{}
